@@ -6,7 +6,7 @@ import numpy as np
 
 # Cargar el modelo RandomForestRegressor
 loaded_model = joblib.load('rforest.joblib')
-model2 = joblib.load('rforest2.joblib')
+model2 = joblib.load('rforest_2.joblib')
 
 # Nombres de las características
 feature_names = ['Caracteristicas', 'Habitaciones', 'Aseos', 'Terraza',
