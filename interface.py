@@ -144,9 +144,6 @@ with col1:
     districte_censal = st.selectbox("Selecciona el districte censal", opcions)
 
     districte_censal_str = format_number(districte_censal)
-    
-    if districte_censal_str == 0:
-        st.write("No s'ha escollit districte censal")
 
 
 with col2:
