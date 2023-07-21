@@ -141,7 +141,7 @@ with col1:
 
     districte_censal_str = format_number(districte_censal)
     
-    if districte_censal_str = 0:
+    if districte_censal_str == 0:
         st.write("No s'ha escollit districte censal")
 
 
@@ -170,7 +170,7 @@ with col2:
                                     preuTeoric]], columns=feature_names)
 
         # Realizar la predicción
-        if districte_censal_str = 0
+        if districte_censal_str == 0
             prediction = np.round(loaded_model.predict(input_data)/1000)*1000
         else:
             st.write('falta')
