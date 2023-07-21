@@ -6,6 +6,7 @@ import numpy as np
 
 # Cargar el modelo RandomForestRegressor
 loaded_model = joblib.load('rforest.joblib')
+model2 = joblib.load('rforest2.joblib')
 
 # Nombres de las características
 feature_names = ['Caracteristicas', 'Habitaciones', 'Aseos', 'Terraza',
@@ -66,6 +67,7 @@ with col1:
                     'Sarrià-Sant Gervasi', 'Gràcia', 'Les Corts', 'Eixample',
                     'Sant Andreu', 'Horta-Guinardó')
     barri_valor = st.selectbox('Barri', value_barris)
+    
 
     def convertir_barri_numeric(value):
         barri = ''
@@ -129,6 +131,19 @@ with col1:
     barri, preuM2, pob_ocupada, renta_mitjana = \
         convertir_barri_numeric(barri_valor)
     preuTeoric = preuM2 * metros
+    
+    def format_number(num):
+        return f"{num:03d}"
+
+    opcions = list(range(151))
+
+    districte_censal = st.selectbox("Selecciona el districte censal", opcions)
+
+    districte_censal_str = format_number(districte_censal)
+    
+    if districte_censal_str = 0:
+        st.write("No s'ha escollit districte censal")
+
 
 with col2:
     # Botón para mostrar las características
@@ -155,7 +170,11 @@ with col2:
                                     preuTeoric]], columns=feature_names)
 
         # Realizar la predicción
-        prediction = np.round(loaded_model.predict(input_data)/1000)*1000
+        if districte_censal_str = 0
+            prediction = np.round(loaded_model.predict(input_data)/1000)*1000
+        else:
+            st.write('falta')
+            
 
         # Mostrar el resultado de la predicción
         st.write(
