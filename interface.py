@@ -6,8 +6,12 @@ import numpy as np
 
 # Cargar el modelo RandomForestRegressor
 loaded_model = joblib.load('rforest.joblib')
-model2 = joblib.load('rforest_2.joblib')
+#model2 = joblib.load('rforest_2.joblib')
+# Obtener la versión de Joblib
+joblib_version = joblib.__version__
 
+# Mostrar la versión de Joblib en la aplicación de Streamlit
+st.write("Versión de Joblib:", joblib_version)
 # Nombres de las características
 feature_names = ['Caracteristicas', 'Habitaciones', 'Aseos', 'Terraza',
                  'Piscina', 'Garaje', 'Metros', 'Barri', ' Poblacio_ocupada',
@@ -15,6 +19,7 @@ feature_names = ['Caracteristicas', 'Habitaciones', 'Aseos', 'Terraza',
 
 # Interfaz de Streamlit
 st.title("Predicció d'Immobles a Barcelona")
+st.write(
 st.write('Introdueix els valors de les característiques y prem el botó '
          'corresponent.')
 caracteristicas_valores = ('Apartament', 'Àtic', 'Finca Rústica', 'Duplex',
