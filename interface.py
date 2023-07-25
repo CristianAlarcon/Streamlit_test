@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Cargar el modelo RandomForestRegressor
-#loaded_model = joblib.load('rforest.joblib')
+loaded_model = joblib.load('rforest.joblib')
 model2 = joblib.load('rforest_2.joblib')
 # Obtener la versión de Joblib
 joblib_version = joblib.__version__
@@ -145,13 +145,19 @@ with col1:
 
     districte_censal_str = format_number(districte_censal)
 
+data1 = pd.read_csv('PreuBarcelonaCens.csv')
 
 with col2:
     # Botón para mostrar las características
     if st.button('Mostrar Característiques'):
         # Crear un gráfico de barras para visualizar las importancias
         # de las características
-        importances = loaded_model.feature_importances_
+        if districte_censal_str == '000':
+            chosen_model = loaded_model
+        else:
+            st.write('falta')
+            input_data = pd.DataFrame([[caracteristicas, habitaciones, aseos,
+        importances = chosen_model.feature_importances_
         fig, ax = plt.subplots()
         ax.barh(range(len(importances)), importances)
         ax.set_yticks(range(len(feature_names)))
@@ -165,16 +171,22 @@ with col2:
     # Botón para realizar la predicción
     if st.button('Predir'):
         # Crear un DataFrame con los valores de entrada
-        input_data = pd.DataFrame([[caracteristicas, habitaciones, aseos,
-                                    terraza, piscina, garaje, metros, barri,
-                                    pob_ocupada, renta_mitjana, preuM2,
-                                    preuTeoric]], columns=feature_names)
+        
 
         # Realizar la predicción
         if districte_censal_str == '000':
+            input_data = pd.DataFrame([[caracteristicas, habitaciones, aseos,
+                                    terraza, piscina, garaje, metros, barri,
+                                    pob_ocupada, renta_mitjana, preuM2,
+                                    preuTeoric]], columns=feature_names)
             prediction = np.round(loaded_model.predict(input_data)/1000)*1000
         else:
             st.write('falta')
+            input_data = pd.DataFrame([[caracteristicas, habitaciones, aseos,
+                                    terraza, piscina, garaje, metros, barri,
+                                    pob_ocupada, renta_mitjana, preuM2,
+                                    preuTeoric]], columns=feature_names)
+            prediction = np.round(loaded_model.predict(input_data)/1000)*1000
             
 
         # Mostrar el resultado de la predicción
